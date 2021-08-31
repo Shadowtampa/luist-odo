@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Board;
+
 use Illuminate\Database\Seeder;
 
 class BoardSeeder extends Seeder
@@ -13,6 +15,13 @@ class BoardSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Board::create([
+            'title'=> 'board 1',
+            'user_id'=> 1,
+        ]);
+        Board::create([
+            'title'=> 'board 2',
+            'user_id'=> 2,
+        ]);
     }
 }
