@@ -25,5 +25,7 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::get('/boards', 'App\http\Controllers\BoardController@index');
+Route::get('/boards/edit/{id}', 'App\http\Controllers\BoardController@edit');
+Route::get('/boards/update/{id}', 'App\http\Controllers\BoardController@update');
 // Route::get('/boards/create', 'BoardController@create');
 

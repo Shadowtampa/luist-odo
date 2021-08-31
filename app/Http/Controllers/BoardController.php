@@ -56,9 +56,10 @@ class BoardController extends Controller
      * @param  \App\Models\board  $board
      * @return \Illuminate\Http\Response
      */
-    public function edit(board $board)
+    public function edit($id)
     {
-        //
+        $board = Board::findorfail($id);
+        return view('boards.edit', compact('board'));
     }
 
     /**
@@ -68,9 +69,12 @@ class BoardController extends Controller
      * @param  \App\Models\board  $board
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, board $board)
+    public function update(Request $request, $id)
     {
-        //
+        $board = Board::findorfail($id);
+        $board->title = $request->title;
+        $board->save();
+        return redirect('/boards');
     }
 
     /**

@@ -8,7 +8,9 @@
   <div class="card-header">{{$board->title}}</div>
   <div class="card-body">
     <p class="card-text">Criado em: {{$board->created_at}}</p>
-    <a class="btn btn-primary" href='#'>Gerenciar</a>
+    <form method='get'>
+      <a class="btn btn-primary" href='/boards/edit/{{$board->id}}'>Gerenciar</a>
+    </form>
   </div>
 </div>
 @endforeach
