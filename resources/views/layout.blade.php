@@ -48,16 +48,19 @@
             </div>
           </li>
         </ul>
-          <form class="d-flex">
-            <ul class="navbar-nav me-auto"> 
-              @guest
-              <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
+        <form class="d-flex">
+          <ul class="navbar-nav me-auto">
+            @guest
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
             </li>
             @endguest
             @auth
             <li class="nav-item">
-              <a class="nav-link" href="#">Logout</a>
+              <a class="nav-link" href="/dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
             </li>
             @endauth
           </ul>
@@ -67,6 +70,8 @@
   </nav>
 
   <h1>@yield('title')</h1>
+
+  @yield('content')
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
