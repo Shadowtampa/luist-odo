@@ -4,13 +4,14 @@
 
 @section('content')
 
-<form method='put' action='{{action('App\http\Controllers\BoardController@update', $board->id)}}'>
-<div class="form-group" method="post" action='0'> 
-  <label class="col-form-label" for="inputDefault">Dê um título ao seu quadro</label>
-  <input name='title' type="text" value="{{$board->title}}" class="form-control" placeholder="Default input" id="inputDefault">
-</div>
-
-<button type="submit" class="btn btn-primary">Enviar</button>
+<form action='{{action('BoardController@update', $board->id)}}' method='post'>
+  @csrf
+  <div class="form-group">
+    <label class="col-form-label" for="inputDefault">Dê um título ao seu quadro</label>
+    <input name='title' type="text" value="{{$board->title}}" class="form-control" placeholder="Default input" id="inputDefault">
+  </div>
+  {{method_field('put')}}
+  <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
 
 @endsection

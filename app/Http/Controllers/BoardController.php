@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\board;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BoardController extends Controller
 {
@@ -14,7 +15,7 @@ class BoardController extends Controller
      */
     public function index()
     {
-        $boards = Board::all();
+        $boards = Board::where('user_id', Auth::user()->id)->get();
         return view ('boards.index', compact('boards'));
     }
 
@@ -25,7 +26,7 @@ class BoardController extends Controller
      */
     public function create()
     {
-        //
+        return view ('boards.create');
     }
 
     /**
@@ -36,7 +37,11 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $board = new Board();
+        $board->title = $request->title;
+        $board->user_id = BoardController::get_logged_user_ID();
+        $board->save();
+        return redirect('/boards');
     }
 
     /**
@@ -83,8 +88,14 @@ class BoardController extends Controller
      * @param  \App\Models\board  $board
      * @return \Illuminate\Http\Response
      */
-    public function destroy(board $board)
+    public function destroy($id)
     {
-        //
+        $board = Board::findorfail($id);
+        $board->delete();
+        return redirect('/boards');
+    }
+
+    public static function get_logged_user_ID(){
+        return Auth::user()->id;
     }
 }

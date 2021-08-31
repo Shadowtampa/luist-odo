@@ -11,6 +11,11 @@
     <form method='get'>
       <a class="btn btn-primary" href='/boards/edit/{{$board->id}}'>Gerenciar</a>
     </form>
+    <form action='{{action('BoardController@destroy', $board->id)}}' method='post'>
+      @csrf
+      {{method_field('delete')}}
+      <button type="submit" class="btn btn-danger">Enviar</button>
+    </form>
   </div>
 </div>
 @endforeach

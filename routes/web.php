@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BoardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +23,10 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/boards', 'App\http\Controllers\BoardController@index');
-Route::get('/boards/edit/{id}', 'App\http\Controllers\BoardController@edit');
-Route::get('/boards/update/{id}', 'App\http\Controllers\BoardController@update');
-// Route::get('/boards/create', 'BoardController@create');
+Route::get('/boards', 'BoardController@index');
+Route::get('/boards/edit/{id}', 'BoardController@edit');
+Route::put('/boards/update/{id}', 'BoardController@update');
+Route::delete('/boards/delete/{id}', 'BoardController@destroy');
+Route::get('/boards/create', 'BoardController@create');
+Route::post('/boards/store', 'BoardController@store');
 
