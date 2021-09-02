@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\todo;
+use App\Models\Todo_list;
 use Illuminate\Http\Request;
 
 class TodoController extends Controller
@@ -22,9 +23,10 @@ class TodoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id, Request $request)
     {
-        //
+        $this->store($id, $request);
+        return back();
     }
 
     /**
@@ -33,9 +35,13 @@ class TodoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id, Request $request)
     {
-        //
+        $todo = new Todo();
+        $todo->title = $request->title;
+        $todo->list_id = $id;
+        $todo->board_id = Todo_list::findorfail($id)->board_id;
+        $todo->save();
     }
 
     /**

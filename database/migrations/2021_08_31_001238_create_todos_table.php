@@ -17,9 +17,13 @@ class CreateTodosTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('title');
-            $table->boolean('is_feito');
+            $table->boolean('is_feito')->default(false);
+
             $table->unsignedBigInteger('list_id');
             $table->foreign('list_id')->references('id')->on('todo_lists');
+            
+            $table->unsignedBigInteger('board_id');
+            $table->foreign('board_id')->references('id')->on('boards');
         });
     }
 

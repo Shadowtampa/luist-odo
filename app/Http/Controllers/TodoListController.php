@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ListRequest;
 use App\Models\todo_list;
 use Illuminate\Http\Request;
 
@@ -22,9 +23,10 @@ class TodoListController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create($id, ListRequest $request)
+    {        
+        $this->store($id,$request);
+        return back();
     }
 
     /**
@@ -33,9 +35,12 @@ class TodoListController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id, ListRequest $request)
     {
-        //
+        $list = new Todo_list();
+        $list->title = $request->title;
+        $list->board_id = $id;
+        $list->save();
     }
 
     /**
@@ -44,7 +49,7 @@ class TodoListController extends Controller
      * @param  \App\Models\todo_list  $todo_list
      * @return \Illuminate\Http\Response
      */
-    public function show(todo_list $todo_list)
+    public function show($id)
     {
         //
     }
@@ -78,8 +83,10 @@ class TodoListController extends Controller
      * @param  \App\Models\todo_list  $todo_list
      * @return \Illuminate\Http\Response
      */
-    public function destroy(todo_list $todo_list)
+    public function destroy($id)
     {
-        //
+        $list = Todo_list::findorfail($id);
+        $list->delete();
+        return back();
     }
 }

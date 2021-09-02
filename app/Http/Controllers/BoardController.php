@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\board;
+use App\Models\Board;
+use App\Models\Todo;
+use App\Models\Todo_list;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,9 +52,12 @@ class BoardController extends Controller
      * @param  \App\Models\board  $board
      * @return \Illuminate\Http\Response
      */
-    public function show(board $board)
+    public function show($id)
     {
-        //
+        $board = Board::findorfail($id);
+        $board_lists = Todo_list::where('board_id', $board->id)->get();
+        $todos = Todo::where('board_id', $board->id)->get();
+        return view('boards.show', compact('board','board_lists', 'todos'));
     }
 
     /**
